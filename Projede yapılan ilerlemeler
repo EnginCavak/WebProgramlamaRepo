@@ -1,0 +1,20 @@
+Veritabanı Yapılandırması:
+
+Projede SQL Server veya PostgreSQL ile çalışabilmek için Entity Framework Core tabanlı AppDbContext sınıfı tanımlandı.
+Veritabanı tabloları için modeller (Admin, Musteri, Salon, Calisan, Islem, Randevu, FotoOneri, vb.) oluşturuldu.
+Veritabanı bağlantısı, Program.cs üzerinden yapılandırıldı ve bağlantı dizgisi (DefaultConnection) tanımlandı.
+
+Identity Entegrasyonu:
+
+Kullanıcı yönetimi ve kimlik doğrulama işlemleri için ASP.NET Identity Framework eklendi.
+Kullanıcı ve rol yönetimi için IdentityUser ve IdentityRole sınıfları ile Entity Framework bağlantısı sağlandı.
+
+Proje Mimari Yapısı:
+
+MVC (Model-View-Controller) mimarisi kullanılarak projenin temel yapısı oluşturuldu.
+Model sınıfları oluşturulup veritabanı ile eşlendi, kontrolcülerle (Controllers) iş mantıkları geliştirildi ve görünümler (Views) tasarlandı.
+
+Kod Optimizasyonu ve Hata Çözümü:
+
+Entity Framework'te zorunlu alanlar (Required) ve ilişki kuralları gibi konfigürasyonlar yapıldı.
+AppDbContext sınıfında CS8618 hatası gibi veritabanı modeliyle ilgili problemler düzeltildi.
