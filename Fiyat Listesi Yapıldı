@@ -1,0 +1,214 @@
+@{
+    ViewData["Title"] = "Fiyat Listesi";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding-top: 60px; /* Navbar'ın üst kısmının altında sayfa içeriği */
+        }
+
+        /* Sabit Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        /* Sayfanın geri kalan kısmı için boşluk */
+        .content {
+            margin-top: 60px; /* Navbar'ın hemen altına sayfa içeriğini ekler */
+        }
+
+        /* Fiyatlar tablosu */
+        .pricing-table {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-table h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .pricing-table table {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            text-align: center;
+            padding: 12px;
+        }
+
+        .pricing-table th {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .pricing-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Kuaför Salonumuz</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Home")">Anasayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hakkimizda">Hakkımızda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#hizmetler">Hizmetlerimiz</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("FiyatListesi", "Home")">Fiyat Listesi</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        <section id="fiyatlar" class="container my-5 pricing-table">
+            <h2 class="text-center mb-4">Fiyat Listesi</h2>
+
+            <!-- Kadın Fiyatları -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>KADIN</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hizmet</th>
+                                <th>Ücret</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Fön ve Şekillendirme</td><td>200 TL</td></tr>
+                            <tr><td>Sakal Kesimi</td><td>200 TL</td></tr>
+                            <tr><td>Saç Kesimi</td><td>400 TL</td></tr>
+                            <tr><td>Saç Sakal Kesimi</td><td>600 TL</td></tr>
+                            
+                            <tr><td>Manikür</td><td>400 TL</td></tr>
+                            <tr><td>Pedikür</td><td>500 TL</td></tr>
+                            
+                            <tr><td>Lazer Epilasyon</td><td>10000 TL</td></tr>
+                            <tr><td>Saç Bakımı</td><td>300 - 1000 TL</td></tr>
+                            <tr><td>Saç Boyama</td><td>1500 - 3000 TL</td></tr>
+                            <tr><td>Cilt Bakımı</td><td>600 TL</td></tr>
+                            
+                            <tr><td>Perma</td><td>1500 - 3000 TL</td></tr>
+                            <tr><td>Düzleştirme</td><td>1000 - 2000 TL</td></tr>
+                           
+                            <tr><td>Kaş Tasarımı</td><td>200 TL</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Erkek Fiyatları -->
+                <div class="col-md-6">
+                    <h3>ERKEK</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hizmet</th>
+                                <th>Ücret</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Fön ve Şekillendirme</td><td>150 TL</td></tr>
+                            <tr><td>Sakal Kesimi</td><td>150 TL</td></tr>
+                            <tr><td>Saç Kesimi</td><td>350 TL</td></tr>
+                            <tr><td>Saç Sakal Kesimi</td><td>500 TL</td></tr>
+                            
+                            <tr><td>Manikür</td><td>400 TL</td></tr>
+                            <tr><td>Pedikür</td><td>500 TL</td></tr>
+                           
+                            <tr><td>Lazer Epilasyon</td><td>10000 TL</td></tr>
+                            <tr><td>Saç Bakımı</td><td>300 - 1000 TL</td></tr>
+                            <tr><td>Saç Boyama</td><td>1500 - 3000 TL</td></tr>
+                            <tr><td>Cilt Bakımı</td><td>600 TL</td></tr>
+                          
+                            <tr><td>Perma</td><td>1500 - 3000 TL</td></tr>
+                            <tr><td>Düzleştirme</td><td>1000 - 2000 TL</td></tr>
+                            
+                            <tr><td>Kaş Tasarımı</td><td>200 TL</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Gelin ve Damat Paketleri Yan Yana -->
+            <div class="row mt-5">
+                <!-- Gelin Paketleri -->
+                <div class="col-md-6">
+                    <h3>GELİN</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hizmet</th>
+                                <th>Ücret</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+
+                            <tr><td>Gelin Saçı</td><td>1500 TL</td></tr>
+                            <tr><td>Gelin Makyajı</td><td>2000 TL</td></tr>
+                            <tr><td>Gelin Paket</td><td>6000 TL</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Damat Paketleri -->
+                <div class="col-md-6">
+                    <h3>DAMAT</h3>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Hizmet</th>
+                                <th>Ücret</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr><td>Profesyonel Paket</td><td>2500 TL</td></tr>
+                            <tr><td>Profesyonel Damat</td><td>1500 TL</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+    <footer class="text-center bg-dark text-white py-3">
+        <p>&copy; 2024 Kuaför Salonumuz. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
