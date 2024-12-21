@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - WebKuaforProje</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Navbar düzenlemeleri */
+        .navbar {
+            background-color: #000; /* Siyah arka plan */
+        }
+
+            .navbar .nav-link {
+                color: #fff; /* Beyaz yazı */
+                transition: color 0.3s, opacity 0.3s;
+            }
+
+                .navbar .nav-link:hover {
+                    color: #ddd; /* Açık gri */
+                    opacity: 0.8; /* Solukluk efekti */
+                }
+
+            .navbar .navbar-brand {
+                color: #fff; /* Beyaz yazı */
+                font-weight: bold;
+            }
+
+                .navbar .navbar-brand:hover {
+                    color: #ddd; /* Açık gri */
+                }
+
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">WebKuaforProje</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Index", "Home")">Anasayfa</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Hakkimizda", "Home")">Hakkımızda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Randevu", "Randevu")">Randevu Al</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Fiyatlar", "Home")">Fiyat Listesi</a>
+                    </li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Logout", "Account")">Oturumu Kapat</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Login", "Account")">Oturum Aç</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+
+        <!-- İçerik -->
+        <div class="container">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

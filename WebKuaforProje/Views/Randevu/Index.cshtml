@@ -1,0 +1,35 @@
+﻿@using WebKuaforProje.Models
+@model IEnumerable<WebKuaforProje.Models.Randevu>
+
+@{
+    ViewData["Title"] = "Randevu Listesi";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Randevu Tarihi</th>
+            <th>Hizmet</th>
+            <th>Müşteri</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var randevu in Model)
+        {
+            <tr>
+                <td>@randevu.RandevuTarihi</td>
+                <td>@randevu.Hizmet</td>
+                <td>@(randevu.Musteri?.FirstName) @(randevu.Musteri?.LastName)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@randevu.Id">Düzenle</a> |
+                    <a asp-action="Delete" asp-route-id="@randevu.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Create" class="btn btn-success">Yeni Randevu Ekle</a>

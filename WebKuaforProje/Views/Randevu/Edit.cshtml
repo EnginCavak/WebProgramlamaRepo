@@ -1,0 +1,49 @@
+﻿@model WebKuaforProje.Models.Randevu
+
+@{
+    ViewData["Title"] = "Randevu Düzenle";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form asp-action="Edit">
+    <div class="form-group">
+        <label asp-for="RandevuTarihi" class="control-label"></label>
+        <input asp-for="RandevuTarihi" class="form-control" type="datetime-local" />
+        <span asp-validation-for="RandevuTarihi" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Hizmet" class="control-label"></label>
+        <input asp-for="Hizmet" class="form-control" />
+        <span asp-validation-for="Hizmet" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MusteriId" class="control-label"></label>
+        <select asp-for="MusteriId" class="form-control">
+            <option value="">Müşteri Seçin</option>
+            @foreach (var musteri in ViewBag.Musteriler as IEnumerable<WebKuaforProje.Models.Musteri>)
+            {
+                <option value="@musteri.Id" selected="@(musteri.Id == Model.MusteriId ? true : false)">
+                    @musteri.FirstName @musteri.LastName
+                </option>
+            }
+        </select>
+        <span asp-validation-for="MusteriId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Kaydet" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Geri</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

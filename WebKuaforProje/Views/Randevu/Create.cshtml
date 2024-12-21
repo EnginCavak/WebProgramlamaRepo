@@ -1,0 +1,25 @@
+﻿@model WebKuaforProje.Models.Randevu
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="RandevuTarihi" class="control-label"></label>
+        <input asp-for="RandevuTarihi" class="form-control" />
+        <span asp-validation-for="RandevuTarihi" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Hizmet" class="control-label"></label>
+        <input asp-for="Hizmet" class="form-control" />
+        <span asp-validation-for="Hizmet" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="KullaniciAdi" class="control-label"></label>
+        <input asp-for="KullaniciAdi" class="form-control" />
+        <span asp-validation-for="KullaniciAdi" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+    </div>
+</form>
