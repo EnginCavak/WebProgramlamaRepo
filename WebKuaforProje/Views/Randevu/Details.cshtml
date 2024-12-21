@@ -1,4 +1,7 @@
-﻿@model WebKuaforProje.Models.Randevu
+﻿@using WebKuaforProje.Models
+
+
+@model WebKuaforProje.Models.Randevu
 
 @{
     ViewData["Title"] = "Randevu Detayları";
@@ -14,7 +17,7 @@
             @Html.DisplayNameFor(model => model.Musteri)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Musteri.FirstName) @Html.DisplayFor(model => model.Musteri.LastName)
+            @Html.DisplayFor(model => model.Musteri.FullName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.RandevuTarihi)
@@ -26,6 +29,6 @@
 </div>
 
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Düzenle</a> |
+    <a asp-action="Edit" asp-route-id="@Model.RandevuID">Düzenle</a> |
     <a asp-action="Index">Listeye Dön</a>
 </div>

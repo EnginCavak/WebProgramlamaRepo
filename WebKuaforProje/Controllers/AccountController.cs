@@ -26,14 +26,27 @@ namespace WebKuaforProje.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Kullanıcıyı e-posta ile kontrol et
+                // Kullanıcıyı e-posta ve parola ile kontrol et
                 var musteri = await _context.Musteriler
-                    .FirstOrDefaultAsync(m => m.Email == email && m.PhoneNumber == password);
+                    .FirstOrDefaultAsync(m => m.Email == email && m.PhoneNumber == password);  // Şifreyi phoneNumber ile kontrol ediyorsunuz, buna göre düzeltme yapabilirsiniz.
 
                 if (musteri != null)
                 {
                     // Başarılı giriş
                     TempData["SuccessMessage"] = $"Hoş geldiniz, {musteri.FirstName} {musteri.LastName}!";
+
+                    // Admin veya müşteri rolü kontrolü
+                    if (musteri.Role == "Admin")
+                    {
+                        // Admin girişi
+                        HttpContext.Session.SetString("Role", "Admin");
+                    }
+                    else
+                    {
+                        // Müşteri girişi
+                        HttpContext.Session.SetString("Role", "Musteri");
+                    }
+
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -75,6 +88,7 @@ namespace WebKuaforProje.Controllers
                 }
 
                 // Yeni müşteri oluştur
+                model.Role = "Musteri"; // Varsayılan rol müşteri olarak atanıyor
                 _context.Musteriler.Add(model);
                 await _context.SaveChangesAsync();
 

@@ -32,7 +32,7 @@ namespace WebKuaforProje.Controllers
             }
 
             var price = await _context.Fiyatlar
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.PriceID == id);
             if (price == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace WebKuaforProje.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,ServiceName,PriceAmount")] Price price)
         {
-            if (id != price.Id)
+            if (id != price.PriceID)
             {
                 return NotFound();
             }
@@ -100,7 +100,7 @@ namespace WebKuaforProje.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PriceExists(price.Id))
+                    if (!PriceExists(price.PriceID))
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace WebKuaforProje.Controllers
             }
 
             var price = await _context.Fiyatlar
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.PriceID == id);
             if (price == null)
             {
                 return NotFound();
@@ -149,7 +149,7 @@ namespace WebKuaforProje.Controllers
 
         private bool PriceExists(int id)
         {
-            return _context.Fiyatlar.Any(e => e.Id == id);
+            return _context.Fiyatlar.Any(e => e.PriceID == id);
         }
     }
 }

@@ -1,32 +1,32 @@
-﻿@model WebKuaforProje.Models.User
+﻿@model WebKuaforProje.Models.Musteri
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Müşteri Düzenle";
 }
 
-<h1>Edit</h1>
+<h1>Müşteri Düzenle</h1>
 
-<h4>User</h4>
+<h4>Müşteri</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <!-- Id hidden input for updating the user -->
-            <input type="hidden" asp-for="Id" />
+            <!-- Id hidden input for updating the customer -->
+            <input type="hidden" asp-for="MusteriID" />
 
-            <!-- Username input -->
+            <!-- Name input -->
             <div class="form-group">
-                <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control" />
-                <span asp-validation-for="Username" class="text-danger"></span>
+                <label asp-for="FullName" class="control-label"></label>
+                <input asp-for="FullName" class="form-control" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
             </div>
 
-            <!-- Password input -->
+            <!-- Phone input -->
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" type="password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
             </div>
 
             <!-- Email input -->
@@ -36,23 +36,23 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
 
-            <!-- Role input -->
+            <!-- Address input -->
             <div class="form-group">
-                <label asp-for="Role" class="control-label"></label>
-                <input asp-for="Role" class="form-control" />
-                <span asp-validation-for="Role" class="text-danger"></span>
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
             </div>
 
             <!-- Submit button -->
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Geri Dön</a>
 </div>
 
 @section Scripts {

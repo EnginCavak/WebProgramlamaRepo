@@ -1,7 +1,140 @@
 ﻿@{
-    ViewData["Title"] = "Anasayfa";
+    ViewData["Title"] = "Ana Sayfa";
 }
 
-<h1>WebKuaforProje'ye Hoşgeldiniz</h1>
-<p>Bizimle randevu alabilir, fiyatları öğrenebilir ve daha fazlasını keşfedebilirsiniz!</p>
-<a href="@Url.Action("Randevu", "Randevu")" class="btn btn-primary">Randevu Al</a>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Özel Stil -->
+    <style>
+        /* Sayfa arka plan rengini gri yapar */
+        body {
+            background-color: #000; /* Gri arka plan rengi */
+        }
+
+        /* Hero fotoğrafının tam ekran olmasını sağlar */
+        .hero-container {
+            position: static;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+            .hero-container img {
+                position: absolute; /* Resmi tam ekran yapmak için */
+                top: 0;
+                left: 0;
+                width: 100%; /* Genişliği %100 yapar */
+                height: 100%; /* Yüksekliği %100 yapar */
+                object-fit: cover; /* Resmi tam ekran kaplatır */
+                transition: transform 0.5s ease-in-out;
+            }
+
+            /* Fotoğraf üzerine yazı ekleriz ve yazının büyümesini sağlar */
+            .hero-container .text-overlay {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                text-align: center;
+            }
+
+                .hero-container .text-overlay h1,
+                .hero-container .text-overlay p {
+                    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+                }
+
+                    /* Yazılar ve buton üzerine gelindiğinde büyüme efekti */
+                    .hero-container .text-overlay h1:hover,
+                    .hero-container .text-overlay p:hover,
+                    .hero-container .text-overlay a:hover {
+                        transform: scale(1.1);
+                        transition: transform 0.3s ease-in-out;
+                    }
+
+        /* Hizmetler bölümündeki kutulara büyüme efekti ekleriz */
+        .service {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            padding: 20px;
+            border: 1px solid #ccc; /* Daha belirgin bir gri sınır */
+            border-radius: 8px;
+            background-color: #ffffff; /* Beyaz arka plan rengi */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hafif gölge efekti */
+        }
+
+            .service:hover {
+                transform: scale(1.05); /* Kutunun büyümesi */
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Kutunun üzerine gelindiğinde gölge efekti */
+            }
+
+        /* Butonun üzerine gelindiğinde büyüme efekti */
+        .btn-lg:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tam ekran hero bölümü -->
+    <div class="hero-container">
+        <!-- Arka plan görseli -->
+        <img src="~/images/foto2.jpg" alt="Kuaför Fotoğrafı" class="img-fluid w-100 vh-100 object-fit-cover" />
+
+        <!-- Fotoğrafın üzerine yazılar -->
+        <div class="text-overlay">
+            <h1 class="display-4 fw-bold">Hoş geldiniz, Web Kuaför Projesi!</h1>
+            <p class="lead">Profesyonel ve modern saç tasarımı.</p>
+            <a href="#services" class="btn btn-light btn-lg">Hizmetlerimiz</a>
+        </div>
+    </div>
+
+    <!-- Hizmetler Bölümü -->
+    <section id="services">
+        <div class="container py-5">
+            <h2 class="text-center mb-4">Hizmetlerimiz</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="service text-center">
+                        <h3>Saç Kesimi</h3>
+                        <p>Trend saç modelleri ve profesyonel kesim hizmeti.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service text-center">
+                        <h3>Saç Bakımı</h3>
+                        <p>Saçlarınıza ihtiyacı olan nem ve güç kazandırın.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service text-center">
+                        <h3>Makyaj</h3>
+                        <p>Özel günlerinizi unutulmaz kılacak makyaj stilleri.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center mt-4 py-3">
+        <p>&copy; 2024 Kuaför Salonumuz. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- Bootstrap JS ve bağımlılıkları -->
+    
+   
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

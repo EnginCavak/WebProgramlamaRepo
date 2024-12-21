@@ -32,7 +32,7 @@ namespace WebKuaforProje.Controllers
             }
 
             var admin = await _context.Adminler
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.AdminID == id);
             if (admin == null)
             {
                 return NotFound();
@@ -86,7 +86,7 @@ namespace WebKuaforProje.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Username,Password,FullName,Email")] Admin admin)
         {
-            if (id != admin.Id)
+            if (id != admin.AdminID)
             {
                 return NotFound();
             }
@@ -100,7 +100,7 @@ namespace WebKuaforProje.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AdminExists(admin.Id))
+                    if (!AdminExists(admin.AdminID))
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace WebKuaforProje.Controllers
             }
 
             var admin = await _context.Adminler
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.AdminID == id);
             if (admin == null)
             {
                 return NotFound();
@@ -149,7 +149,7 @@ namespace WebKuaforProje.Controllers
 
         private bool AdminExists(int id)
         {
-            return _context.Adminler.Any(e => e.Id == id);
+            return _context.Adminler.Any(e => e.AdminID == id);
         }
     }
 }

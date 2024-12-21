@@ -1,49 +1,47 @@
-﻿@model WebKuaforProje.Models.Randevu
+﻿@using WebKuaforProje.Models
+
+
+@model WebKuaforProje.Models.Randevu
 
 @{
     ViewData["Title"] = "Randevu Düzenle";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h2>Randevu Düzenle</h2>
 
-<form asp-action="Edit">
-    <div class="form-group">
-        <label asp-for="RandevuTarihi" class="control-label"></label>
-        <input asp-for="RandevuTarihi" class="form-control" type="datetime-local" />
-        <span asp-validation-for="RandevuTarihi" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Hizmet" class="control-label"></label>
-        <input asp-for="Hizmet" class="form-control" />
-        <span asp-validation-for="Hizmet" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="MusteriId" class="control-label"></label>
-        <select asp-for="MusteriId" class="form-control">
+<form method="post" action="@Url.Action("Edit", "Randevu", new { id = Model.RandevuID })">
+    @csrf
+    <div class="mb-3">
+        <label for="MusteriID" class="form-label">Müşteri</label>
+        <select class="form-select" id="MusteriID" name="MusteriID" required>
             <option value="">Müşteri Seçin</option>
-            @foreach (var musteri in ViewBag.Musteriler as IEnumerable<WebKuaforProje.Models.Musteri>)
+            @foreach (var musteri in (SelectList)ViewData["MusteriID"])
             {
-                <option value="@musteri.Id" selected="@(musteri.Id == Model.MusteriId ? true : false)">
-                    @musteri.FirstName @musteri.LastName
-                </option>
+                <option value="@musteri.Value" @(musteri.Value == Model.MusteriID.ToString() ? "selected" : "")>@musteri.Text</option>
             }
         </select>
-        <span asp-validation-for="MusteriId" class="text-danger"></span>
     </div>
 
-    <div class="form-group">
-        <input type="submit" value="Kaydet" class="btn btn-primary" />
+    <div class="mb-3">
+        <label for="CalisanID" class="form-label">Çalışan</label>
+        <select class="form-select" id="CalisanID" name="CalisanID" required>
+            <option value="">Çalışan Seçin</option>
+            @foreach (var calisan in (SelectList)ViewData["CalisanID"])
+            {
+                <option value="@calisan.Value" @(calisan.Value == Model.CalisanID.ToString() ? "selected" : "")>@calisan.Text</option>
+            }
+        </select>
     </div>
+
+    <div class="mb-3">
+        <label for="Hizmet" class="form-label">Hizmet</label>
+        <input type="text" class="form-control" id="Hizmet" name="Hizmet" value="@Model.Hizmet" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="RandevuTarihi" class="form-label">Randevu Tarihi</label>
+        <input type="date" class="form-control" id="RandevuTarihi" name="RandevuTarihi" value="@Model.RandevuTarihi.ToString("yyyy-MM-dd")" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
 </form>
-
-<div>
-    <a asp-action="Index">Geri</a>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

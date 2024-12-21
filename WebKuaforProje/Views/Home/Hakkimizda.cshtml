@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Hakkımızda";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Özel Stil -->
+    <style>
+        /* Sayfa arka plan rengini siyah yapar */
+        body {
+            background-color: #000; /* Siyah arka plan rengi */
+        }
+
+        /* Hero fotoğrafının tam ekran olmasını sağlar */
+        .hero-container {
+            position: static;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+            .hero-container img {
+                position: absolute; /* Resmi tam ekran yapmak için */
+                top: 0;
+                left: 0;
+                width: 100%; /* Genişliği %100 yapar */
+                height: 100%; /* Yüksekliği %100 yapar */
+                object-fit: cover; /* Resmi tam ekran kaplatır */
+                transition: transform 0.5s ease-in-out;
+            }
+
+            /* Fotoğraf üzerine yazılar */
+            .hero-container .text-overlay {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                text-align: center;
+                padding: 20px;
+                background-color: rgba(0, 0, 0, 0.5); /* Yarı saydam arka plan */
+                border-radius: 10px;
+                max-width: 80%;
+                word-wrap: break-word;
+            }
+
+                .hero-container .text-overlay h1,
+                .hero-container .text-overlay p {
+                    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+                }
+
+                    /* Yazılar üzerine gelindiğinde büyüme efekti */
+                    .hero-container .text-overlay h1:hover,
+                    .hero-container .text-overlay p:hover {
+                        transform: scale(1.1);
+                        transition: transform 0.3s ease-in-out;
+                    }
+    </style>
+</head>
+<body>
+
+    <!-- Tam ekran hero bölümü -->
+    <div class="hero-container">
+        <!-- Arka plan görseli -->
+        <img src="~/images/foto2.jpg" alt="Kuaför Fotoğrafı" class="img-fluid w-100 vh-100 object-fit-cover" />
+
+        <!-- Fotoğrafın üzerine yazılar -->
+        <div class="text-overlay">
+            <h1 class="display-4 fw-bold">Web Kuaför Projesi</h1>
+            <p class="lead">Kuaför salonumuzun sunduğu modern ve profesyonel bakım hizmetleriyle, güzelliğinize değer katıyoruz. Saç kesimi, saç bakımı ve makyaj hizmetlerimizle her zaman yanınızdayız!</p>
+            <p>Bizimle iletişime geçin ve size özel bir deneyim yaşayın!</p>
+            <p><strong>15 Yıl Tecrübemizle Sizinleyiz!</strong></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center mt-4 py-3">
+        <p>&copy; 2024 Kuaför Salonumuz. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <!-- Bootstrap JS ve bağımlılıkları -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

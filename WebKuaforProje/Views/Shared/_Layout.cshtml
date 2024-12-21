@@ -10,9 +10,20 @@
     <style>
         /* Navbar düzenlemeleri */
         .navbar {
-            background-color: #000; /* Siyah arka plan */
+            background-color: transparent; /* Başlangıçta şeffaf arka plan */
+            position: fixed; /* Sayfa kaydırıldıkça navbar sabit kalır */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10; /* Navbar her şeyin önünde olacak */
+            transition: background-color 0.3s ease; /* Arka plan renginin değişimi */
         }
 
+            .navbar.scrolled {
+                background-color: #000; /* Sayfa kaydırıldıkça siyah arka plan */
+            }
+
+            /* Navbar üzerindeki yazıların rengi */
             .navbar .nav-link {
                 color: #fff; /* Beyaz yazı */
                 transition: color 0.3s, opacity 0.3s;
@@ -32,8 +43,9 @@
                     color: #ddd; /* Açık gri */
                 }
 
+        /* Navbar'ın sabit olabilmesi için içeriklerin kaymaması için margin-top ekledim */
         .container {
-            margin-top: 20px;
+            margin-top: 80px; /* Navbar'ın yüksekliği kadar boşluk */
         }
     </style>
 </head>
@@ -80,5 +92,20 @@
             @RenderBody()
         </div>
     </div>
+
+    <!-- Sayfa kaydırıldıkça navbar'ın rengini değiştirecek JavaScript -->
+    <script>
+        // Sayfa kaydırıldıkça navbar'ın rengini değiştiren fonksiyon
+        window.onscroll = function () { changeNavbarColor() };
+
+        function changeNavbarColor() {
+            var navbar = document.querySelector('.navbar');
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                navbar.classList.add('scrolled'); // Siyah arka plan
+            } else {
+                navbar.classList.remove('scrolled'); // Şeffaf
+            }
+        }
+    </script>
 </body>
 </html>

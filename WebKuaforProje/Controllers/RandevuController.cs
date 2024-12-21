@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebKuaforProje.Models;
 
@@ -13,51 +14,96 @@ namespace WebKuaforProje.Controllers
             _context = context;
         }
 
-        // GET: Randevu/Create
+        // 1. Randevu Listeleme (Index)
+        public async Task<IActionResult> Index()
+        {
+            var randevular = await _context.Randevular
+                .Include(r => r.Musteri)
+                .Include(r => r.Calisan)
+                .ToListAsync();
+            return View(randevular);
+        }
+
+        // 2. Randevu Oluşturma (Create) - GET
         public IActionResult Create()
         {
-            ViewBag.Musteriler = _context.Musteriler.ToList(); // Müşterileri ViewBag'e ekliyoruz
+            ViewData["MusteriID"] = new SelectList(_context.Musteriler, "MusteriID", "FullName");
+            ViewData["CalisanID"] = new SelectList(_context.Calisanlar, "CalisanID", "FullName");
             return View();
         }
 
-        // POST: Randevu/Create
+        // 3. Randevu Oluşturma (Create) - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Randevu model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(model);
+                _context.Randevular.Add(model);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));  // Randevu listesine yönlendirilebilir
+                TempData["SuccessMessage"] = "Randevunuz başarıyla alındı!";
+                return RedirectToAction(nameof(Index));
             }
-            ViewBag.Musteriler = _context.Musteriler.ToList(); // Eğer model geçerli değilse, müşteri listesini tekrar gönderiyoruz
+
+            ViewData["MusteriID"] = new SelectList(_context.Musteriler, "MusteriID", "FullName", model.MusteriID);
+            ViewData["CalisanID"] = new SelectList(_context.Calisanlar, "CalisanID", "FullName", model.CalisanID);
+            TempData["ErrorMessage"] = "Lütfen tüm alanları doğru şekilde doldurun.";
             return View(model);
         }
 
-        // GET: Randevu/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // 4. Randevu Silme (Delete) - GET
+        public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var randevu = await _context.Randevular
+                .Include(r => r.Musteri)
+                .Include(r => r.Calisan)
+                .FirstOrDefaultAsync(r => r.RandevuID == id);
 
-            var randevu = await _context.Randevular.Include(r => r.Musteri).FirstOrDefaultAsync(r => r.Id == id);
             if (randevu == null)
             {
                 return NotFound();
             }
-            ViewBag.Musteriler = _context.Musteriler.ToList(); // Müşteri listesini ViewBag'e ekliyoruz
+
             return View(randevu);
         }
 
-        // POST: Randevu/Edit/5
+        // 5. Randevu Silme (Delete) - POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var randevu = await _context.Randevular.FindAsync(id);
+            if (randevu != null)
+            {
+                _context.Randevular.Remove(randevu);
+                await _context.SaveChangesAsync();
+                TempData["SuccessMessage"] = "Randevu başarıyla silindi.";
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // 6. Randevu Düzenleme (Edit) - GET
+        public async Task<IActionResult> Edit(int id)
+        {
+            var randevu = await _context.Randevular.FindAsync(id);
+            if (randevu == null)
+            {
+                return NotFound();
+            }
+
+            ViewData["MusteriID"] = new SelectList(_context.Musteriler, "MusteriID", "FullName", randevu.MusteriID);
+            ViewData["CalisanID"] = new SelectList(_context.Calisanlar, "CalisanID", "FullName", randevu.CalisanID);
+
+            return View(randevu);
+        }
+
+        // 7. Randevu Düzenleme (Edit) - POST
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Randevu model)
         {
-            if (id != model.Id)
+            if (id != model.RandevuID)
             {
                 return NotFound();
             }
@@ -68,10 +114,12 @@ namespace WebKuaforProje.Controllers
                 {
                     _context.Update(model);
                     await _context.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "Randevu başarıyla güncellendi.";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RandevuExists(model.Id))
+                    if (!_context.Randevular.Any(e => e.RandevuID == model.RandevuID))
                     {
                         return NotFound();
                     }
@@ -80,15 +128,29 @@ namespace WebKuaforProje.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));  // Randevu listesine yönlendirilebilir
             }
-            ViewBag.Musteriler = _context.Musteriler.ToList(); // Eğer model geçerli değilse, müşteri listesini tekrar gönderiyoruz
+
+            ViewData["MusteriID"] = new SelectList(_context.Musteriler, "MusteriID", "FullName", model.MusteriID);
+            ViewData["CalisanID"] = new SelectList(_context.Calisanlar, "CalisanID", "FullName", model.CalisanID);
+
+            TempData["ErrorMessage"] = "Bir hata oluştu. Lütfen tekrar deneyin.";
             return View(model);
         }
 
-        private bool RandevuExists(int id)
+        // 8. Randevu Detayları (Details) - GET
+        public async Task<IActionResult> Details(int id)
         {
-            return _context.Randevular.Any(e => e.Id == id);
+            var randevu = await _context.Randevular
+                .Include(r => r.Musteri)
+                .Include(r => r.Calisan)
+                .FirstOrDefaultAsync(r => r.RandevuID == id);
+
+            if (randevu == null)
+            {
+                return NotFound();
+            }
+
+            return View(randevu);
         }
     }
 }

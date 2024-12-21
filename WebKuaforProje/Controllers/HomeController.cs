@@ -21,5 +21,11 @@ namespace WebKuaforProje.Controllers
         {
             return View();
         }
+
+        public IActionResult Randevu()
+        {
+            return View();
+        }
+
     }
 }
