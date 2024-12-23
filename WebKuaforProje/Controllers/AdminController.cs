@@ -47,9 +47,7 @@ namespace WebKuaforProje.Controllers
             return View();
         }
 
-        // POST: Admins/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Username,Password,FullName,Email")] Admin admin)
